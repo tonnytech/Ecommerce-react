@@ -6,9 +6,7 @@ import {
   TOGGLE_CART_ITEM_AMOUNT,
   CLEAR_CART,
   COUNT_CART_TOTALS,
-} from '../actions'
-
-const initialState = {}
+} from '../actions';
 
 const CartContext = React.createContext()
 
