@@ -15,7 +15,10 @@ import {
 
 const initialState = {
   isSidebarOpen: false,
-
+  products_loading: false,
+  products_error: false,
+  products: [],
+  featured_products: [],
 }
 
 const ProductsContext = React.createContext()
@@ -32,6 +35,21 @@ const closeSidebar =()=> {
   dispatch({type: SIDEBAR_CLOSE})
   
 }
+
+const fetchProducts = async(url) => {
+  dispatch({type: GET_PRODUCTS_BEGIN})
+  try {
+    const responce = await axios.get(url)
+    const products = responce.data
+    dispatch({type: GET_PRODUCTS_SUCCESS, payload: products})
+  } catch (error) {
+    dispatch({type:GET_PRODUCTS_ERROR})
+  }  
+}
+
+useEffect(()=>{
+  fetchProducts(url)
+},[])
 
 
   return (
